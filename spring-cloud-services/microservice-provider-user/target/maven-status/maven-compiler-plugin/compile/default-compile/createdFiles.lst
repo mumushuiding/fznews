@@ -1,0 +1,11 @@
+com\lt\cloud\pojo\UserReceiver.class
+com\lt\cloud\service\impl\UserServiceImpl.class
+com\lt\cloud\service\IdentityService.class
+com\lt\cloud\utils\JsonUtils.class
+com\lt\cloud\mapper\UserMapper.class
+com\lt\cloud\controller\UserController.class
+com\lt\cloud\service\impl\IdentityServiceImpl.class
+com\lt\cloud\service\UserService.class
+com\lt\cloud\MicroserviceProviderUserApplication.class
+com\lt\cloud\pojo\User.class
+com\lt\cloud\controller\IdentityController.class

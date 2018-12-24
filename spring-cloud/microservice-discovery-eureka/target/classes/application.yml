@@ -1,0 +1,16 @@
+server:
+  port: 8761
+spring: 
+  application:
+    name: microservice-discovery-eureka
+eureka:
+  instance:
+    hostname: eureka-server
+    prefer-ip-address: true
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+  server: 
+    enable-self-preservation: false # 关闭自我保护模式（缺省为打开）)

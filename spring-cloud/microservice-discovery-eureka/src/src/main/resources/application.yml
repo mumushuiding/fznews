@@ -1,0 +1,8 @@
+server:
+  port: 8761
+spring: 
+  application:
+    name: microservice-discovery-eureka
+eureka:
+  server:
+    enable-self-preservation: false # 关闭自我保护模式（缺省为打开）)

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.springcloud.oms</groupId>
+    <artifactId>spring-cloud-oms</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>spring-cloud-services</artifactId>
+  <name>spring-cloud-services</name>
+  <url>http://maven.apache.org</url>
+  <packaging>pom</packaging>
+  <properties>
+	<lcn.last.version>4.1.0</lcn.last.version>
+  </properties>
+  <modules>
+  	<module>microservice-provider-user</module>
+  	<module>om-provider-payment</module>
+  	<module>oms-gataway-zuul</module>
+  	<module>oms-provider-adv</module>
+  	<module>oms-provider-balance</module>
+  	<module>oms-provider-customer</module>
+  	<module>oms-provider-incomeAdjust</module>
+  	<module>oms-provider-invoice</module>
+  	<module>oms-provider-order</module>
+  	<module>oms-provider-public</module>
+  	<module>oms-provider-rebate</module>
+  </modules>
+</project>

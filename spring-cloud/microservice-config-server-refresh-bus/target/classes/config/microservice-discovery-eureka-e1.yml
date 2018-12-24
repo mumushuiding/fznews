@@ -1,0 +1,7 @@
+profile: eureka-1.0
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url: 
+      defaultZone: http://129.0.73.62:8761/eureka/

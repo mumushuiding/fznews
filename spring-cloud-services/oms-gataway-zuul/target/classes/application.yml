@@ -1,0 +1,24 @@
+server:
+  port: 7999
+spring:
+  resources:
+    chain:
+      cache: false
+      gzipped: true
+    cache:
+      period: 604800  
+  mvc:
+    static-path-pattern: /**
+  cloud:
+    stream:
+      bindings:
+        outputAdv: 
+          destination: adv
+management:
+  endpoint:
+    hystrix:
+      config: 
+        hystrix.command.serverMethod.execution.isolation.thread.timeoutInMilliseconds: 3000      
+
+    
+    

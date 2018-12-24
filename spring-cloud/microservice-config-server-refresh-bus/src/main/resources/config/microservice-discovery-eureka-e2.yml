@@ -1,0 +1,6 @@
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url: 
+      defaultZone: http://http://129.0.98.31:8761/eureka/ #其他机子IP

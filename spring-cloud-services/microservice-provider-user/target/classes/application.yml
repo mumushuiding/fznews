@@ -1,0 +1,20 @@
+server:
+  port: 8000
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://129.0.99.68:3306/fznews_user?useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 1qaz@WSX 
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filter:
+        stat:
+          enabled: false
+logging:
+  level: 
+     com.lt.cloud.mapper: debug  #输出查询语句
+
+
+            
+  

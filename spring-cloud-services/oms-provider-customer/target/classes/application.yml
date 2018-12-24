@@ -1,0 +1,7 @@
+server:
+  port: 8001
+mybatis:
+  type-aliases-package:  com.lt.cloud.pojo
+  mapper-locations:
+  - classpath:mapper/*.xml
+ 

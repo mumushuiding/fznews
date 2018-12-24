@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+  <!-- 指向UserMapper.xml文件 -->
+  
+<mapper namespace="com.lt.cloud.mapper.UserMapper">
+	<sql id="User_Column_List">
+		NUSERID,USERCODE,NODEID,USERNAME
+	</sql>
+	<select id="login" parameterType="user" resultType="user">
+		select <include refid="User_Column_List"/> from user where USERCODE=#{USERCODE} and USERPASSWORD=#{USERPASSWORD}
+	</select>
+	<select id="findById" parameterType="long" resultType="user">
+		select <include refid="User_Column_List"/> from user where NUSERID=#{NUSERID}
+	</select>
+	<select id="selectAllUser" parameterType="user" resultType="user">
+		select <choose>
+					<when test="fields!=null and fields!=''">${fields}</when>
+					<otherwise><include refid="User_Column_List"/></otherwise>
+				</choose> 
+		from user
+		<where>
+		    <if test="NUSERID!=null">NUSERID=#{NUSERID}</if>
+			<if test="USERNAME!=null and USERNAME!=''">
+				<bind name="pattern" value="'%'+_prameter.USERNAME+'%'"/>
+				and (USERNAME like #{pattern} or USERCODE #{pattern})
+			</if>
+			<if test="USERPASSWORD!=null">and USERPASSWORD=#{USERPASSWORD}</if>
+		</where>
+	</select>
+	<select id="find4AutoComplete" parameterType="userReceiver" resultType="user">
+		select <choose>
+					<when test="fields!=null and fields!=''">${fields}</when>
+					<otherwise><include refid="User_Column_List"/></otherwise>
+				</choose> 
+		from user
+		<where>
+			<if test="USERNAME!=null and USERNAME!=''">
+				<bind name="pattern" value="'%'+_parameter.USERNAME+'%'"/>
+				(USERNAME like #{pattern} or USERCODE like #{pattern})
+			</if>
+		</where>
+	</select>
+	<select id="selectAllUserWithHash" parameterType="hashmap" resultType="user">
+		select <choose>
+					<when test="fields!=null and fields!=''">${fields}</when>
+					<otherwise><include refid="User_Column_List"/></otherwise>
+				</choose> 
+		from user
+		<where>
+		    <if test="NUSERID!=null">NUSERID=#{NUSERID}</if>
+			<if test="USERNAME!=null and USERNAME!=''">
+				<bind name="pattern" value="'%'+_parameter.USERNAME+'%'"/>
+				and (USERNAME like #{pattern} or USERCODE like #{pattern})
+			</if>
+			<if test="USERPASSWORD!=null">and USERPASSWORD=#{USERPASSWORD}</if>
+		</where>
+	</select>
+	<update id="updatePassword" parameterType="hashmap">
+		update user set USERPASSWORD=#{USERPASSWORD} where NUSERID=#{NUSERID}
+	</update>
+	<update id="updateUser" parameterType="user" >
+	   
+	</update>
+</mapper>

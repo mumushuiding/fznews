@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+  <!-- 指向UserMapper.xml文件 -->
+  
+<mapper namespace="com.lt.cloud.mapper.OrderMapper">
+	<select id="selectById" parameterType="long" resultType="advOrder">
+		select * from advorder where SYS_DOCUMENTID=#{SYS_DOCUMENTID}
+	</select>
+	<select id="findAll" parameterType="advOrderReceiver" resultType="advOrder">
+		select * from advorder 
+		<where>
+			<if test="SYS_DOCUMENTID!=null and SYS_DOCUMENTID!=''">SYS_DOCUMENTID=#{SYS_DOCUMENTID}</if>
+			<if test="AO_Customer!=null and AO_Customer!=''">
+				<bind name="pattern" value="'%'+_parameter.AO_Customer+'%'"/>
+				and AO_Customer like #{pattern}
+			</if>
+			<if test="startDate!=null">and SYS_LASTMODIFIED &gt;=#{startDate}</if>
+			<if test="endDate!=null">and SYS_LASTMODIFIED &lt;=#{endDate}</if>
+			
+		</where>
+		order by SYS_LASTMODIFIED desc,SYS_CREATED desc
+	</select>
+	<select id="selectAll" parameterType="advOrder" resultType="advOrder">
+		 select * from advorder 
+		<where>
+			<if test="SYS_DOCUMENTID!=null and SYS_DOCUMENTID!=''">SYS_DOCUMENTID=#{SYS_DOCUMENTID}</if>
+			<if test="AO_Customer!=null and AO_Customer!=''">
+				<bind name="pattern" value="'%'+_parameter.AO_Customer+'%'"/>
+				and AO_Customer like #{pattern}
+			</if>
+
+			<if test="AO_Agent!=null and AO_Agent!=''">
+				<bind name="pattern" value="'%'+_parameter.AO_Agent+'%'"/>
+				and AO_Agent like #{pattern}
+			</if>
+			<if test="AO_Advertiser!=null and AO_Advertiser!=''">
+				<bind name="pattern" value="'%'+_parameter.AO_Advertiser+'%'"/>
+				and AO_Advertiser like #{pattern}
+			</if>
+
+			<if test="AO_Org!=null and AO_Org!=''">and AO_Org=#{AO_Org}</if>
+			<if test="AO_OperatorID!=null and AO_OperatorID!=''">and AO_OperatorID=#{AO_OperatorID}</if>
+			<if test="AO_Salesman!=null and AO_Salesman!=''">
+				<bind name="pattern" value="'%'+_parameter.AO_Salesman+'%'"/>
+					and AO_Salesman like #{pattern}
+			</if>
+			<if test="startDate!=null and startDate!=''">and SYS_LASTMODIFIED &gt;=#{startDate}</if>
+			<if test="endDate!=null and endDate!=''">and SYS_LASTMODIFIED &lt;=#{endDate}</if>
+			
+		</where>
+		order by SYS_LASTMODIFIED desc,SYS_CREATED desc
+	</select>
+	
+	<insert id="insertAdvOrder" parameterType="advOrder" useGeneratedKeys="true" keyProperty="SYS_DOCUMENTID">
+		insert into advorder(
+			SYS_DOCLIBID,SYS_FOLDERID,SYS_CREATED,SYS_LASTMODIFIED,
+			SYS_CURRENTUSERID,SYS_CURRENTUSERNAME,SYS_AUTHORS,AO_Customer_ID,
+			AO_Customer,AO_Agent_ID,AO_Agent,AO_Advertiser_ID,AO_Advertiser,
+			AO_CustService_ID,AO_CustService,AO_Org_ID,AO_Org,AO_Salesman_ID,
+			AO_Salesman,AO_AdCountIC,AO_AllMoney,AO_AmountPaid,AO_ReceivedMoney,
+			AO_DebtMoney,AO_OperatorID,AO_Memo
+		) values (
+			#{SYS_DOCLIBID},#{SYS_FOLDERID},#{SYS_CREATED},#{SYS_LASTMODIFIED},
+			#{SYS_CURRENTUSERID},#{SYS_CURRENTUSERNAME},#{SYS_AUTHORS},#{AO_Customer_ID},
+			#{AO_Customer},#{AO_Agent_ID},#{AO_Agent},#{AO_Advertiser_ID},#{AO_Advertiser},
+			#{AO_CustService_ID},#{AO_CustService},#{AO_Org_ID},#{AO_Org},#{AO_Salesman_ID},
+			#{AO_Salesman},#{AO_AdCountIC},#{AO_AllMoney},#{AO_AmountPaid},#{AO_ReceivedMoney},
+			#{AO_DebtMoney},#{AO_OperatorID},#{AO_Memo}
+		)
+	</insert>
+	
+	<update id="updateAdvOrder" parameterType="advOrder">
+		update advorder
+		<set>
+			<if test="AO_Customer_ID!=null and AO_Customer_ID!=''">AO_Customer_ID=#{AO_Customer_ID},</if>
+			<if test="AO_Customer!=null and AO_Customer!=''">AO_Customer=#{AO_Customer},</if>
+			<if test="AO_Agent_ID!=null and AO_Agent_ID!=''">AO_Agent_ID=#{AO_Agent_ID},</if>
+			<if test="AO_Agent!=null and AO_Agent!=''">AO_Agent=#{AO_Agent},</if>
+			<if test="AO_Advertiser_ID!=null and AO_Advertiser_ID!=''">AO_Advertiser_ID=#{AO_Advertiser_ID},</if>
+			<if test="AO_Advertiser!=null and AO_Advertiser!=''">AO_Advertiser=#{AO_Advertiser},</if>
+			<if test="AO_Org_ID!=null and AO_Org_ID!=''">AO_Org_ID=#{AO_Org_ID},</if>
+			<if test="AO_Org!=null and AO_Org!=''">AO_Org=#{AO_Org},</if>
+			<if test="AO_Salesman_ID!=null and AO_Salesman_ID!=''">AO_Salesman_ID=#{AO_Salesman_ID},</if>
+			<if test="AO_Salesman!=null and AO_Salesman!=''">AO_Salesman=#{AO_Salesman},</if>
+			<if test="AO_AdCountIC!=null and AO_AdCountIC!=''">AO_AdCountIC=#{AO_AdCountIC},</if>
+			<if test="AO_AllMoney!=null and AO_AllMoney!=''">AO_AllMoney=#{AO_AllMoney},</if>
+			<if test="AO_AmountPaid!=null and AO_AmountPaid!=''">AO_AmountPaid=#{AO_AmountPaid},</if>
+			<if test="AO_ReceivedMoney!=null and AO_ReceivedMoney!=''">AO_ReceivedMoney=#{AO_ReceivedMoney},</if>
+			<if test="AO_DebtMoney!=null and AO_DebtMoney!=''">AO_DebtMoney=#{AO_DebtMoney},</if>
+			<if test="AO_OperatorID!=null and AO_OperatorID!=''">AO_OperatorID=#{AO_OperatorID},</if>
+			<if test="AO_Memo!=null and AO_Memo!=''">AO_Memo=#{AO_Memo}</if>
+	
+		</set>
+		where SYS_DOCUMENTID=#{SYS_DOCUMENTID}
+	</update>
+	
+</mapper>

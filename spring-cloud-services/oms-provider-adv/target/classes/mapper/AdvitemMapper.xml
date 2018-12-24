@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+  <!-- 指向AdvitemMapper.java文件 -->
+  
+<mapper namespace="com.lt.cloud.mapper.AdvitemMapper">
+	<select id="selectById" parameterType="long" resultType="advitem">
+		select * from advitem where SYS_DOCUMENTID=#{SYS_DOCUMENTID}
+	</select>
+	<delete id="deleteById" parameterType="long">
+		delete from advitem where SYS_DOCUMENTID=#{SYS_DOCUMENTID}
+	</delete>
+	<select id="findAll" parameterType="advitemReceiver" resultType="advitem">
+		select *  from advitem
+		<where>
+			<if test="AI_Customer!=null and AI_Customer!=''">
+				<bind name="pattern" value="'%'+_parameter.AI_Customer+'%'"/>
+				 AI_Customer like #{pattern}
+			</if>
+			<if test="AI_OrderID!=null">
+			    and AI_OrderID=#{AI_OrderID}
+			</if>
+			<if test="SYS_DOCUMENTID!=null">
+			    and SYS_DOCUMENTID=#{SYS_DOCUMENTID}
+			</if>
+			<if test="AI_Salesman!=null and AI_Salesman!=''">
+			    and AI_Salesman=#{AI_Salesman}
+			</if>
+			<if test="SYS_AUTHORS!=null and SYS_AUTHORS!=''">
+				and SYS_AUTHORS=#{SYS_AUTHORS}
+			</if>
+			<if test="AI_PublishTimeStart!=null">
+			    and AI_PublishTime &gt;=#{AI_PublishTimeStart}
+			</if>
+			<if test="AI_PublishTimeEnd!=null">
+			    and AI_PublishTime &lt;=#{AI_PublishTimeEnd}
+			</if>
+			<if test="startDate!=null">
+				and SYS_CREATED &gt;=#{startDate}
+			</if>
+			<if test="endDate!=null">
+				and SYS_CREATED &lt;=#{endDate}
+			</if>
+			<if test="isBalance!=null and isBalance==true">
+				and AI_UnbalancedMoney>0
+			</if>
+		</where>
+		 order by AI_PublishTime desc,SYS_LASTMODIFIED desc,SYS_CREATED desc 
+	</select>
+	
+	<select id="selectAllAdvitem" parameterType="advitem" resultType="advitem">
+		select *  from advitem
+		<where>
+			<if test="SYS_DOCUMENTID!=null">SYS_DOCUMENTID=#{SYS_DOCUMENTID}</if>
+			 <if test="AI_OrderID!=null and AI_OrderID!=''">
+				and AI_OrderID=#{AI_OrderID}
+			</if>
+			<if test="AI_Customer!=null and AI_Customer!=''">
+				<bind name="pattern" value="'%'+_parameter.AI_Customer+'%'"/>
+				and AI_Customer like #{pattern}
+			</if>
+			
+			<if test="AI_Agent!=null and AI_Agent!=''">
+				<bind name="pattern" value="'%'+_parameter.AI_Agent+'%'"/>
+				and AI_Agent like #{pattern}
+			</if>
+			<if test="AI_Advertiser!=null and AI_Advertiser!=''">
+				<bind name="pattern" value="'%'+_parameter.AI_Advertiser+'%'"/>
+				and AI_Advertiser like #{pattern}
+			</if>
+			
+			<if test="AI_Customer_ID!=null and AI_Customer_ID!=''">
+				and AI_Customer_ID=#{AI_Customer_ID}
+			</if>
+			<if test="AI_Agent_ID!=null and AI_Agent_ID!=''">
+				and  AI_Agent_ID=#{AI_Agent_ID}
+			</if>
+			<if test="AI_Advertiser_ID!=null and AI_Advertiser_ID!=''">
+				and  AI_Advertiser_ID=#{AI_Advertiser_ID}
+			</if>
+			
+			<if test="AI_PublishTime!=null and AI_PublishTime!=''">
+			    and AI_PublishTime &gt;=#{AI_PublishTime}
+			</if>
+			<if test="AI_PublishEndTime!=null and AI_PublishEndTime!=''">
+			    and AI_PublishEndTime &lt;=#{AI_PublishEndTime}
+			</if>
+			<if test="AI_Trade!=null and AI_Trade!=''">
+			    <bind name="pattern" value="'%'+_parameter.AI_Trade+'%'"/>
+			    and AI_Trade like #{pattern}
+			</if>
+			<if test="AI_OperatorID!=null and AI_OperatorID!=''">
+				and  AI_OperatorID=#{AI_OperatorID}
+			</if>
+
+		</where>
+		 order by AI_PublishTime desc,SYS_LASTMODIFIED desc,SYS_CREATED desc 
+	</select>
+	
+	<insert id="insertAdvitem" parameterType="advitem">
+		insert into advitem  (SYS_CREATED,SYS_LASTMODIFIED,SYS_CURRENTUSERID,SYS_CURRENTUSERNAME,SYS_AUTHORS,
+			SYS_HAVERELATION,AI_OrderID,AI_PreorderID,AI_Customer_ID,AI_Customer,AI_Agent_ID,AI_Agent,
+			AI_Advertiser_ID,AI_Advertiser,AI_Org_ID,AI_Org,AI_Salesman_ID,AI_Salesman,AI_Publication_ID,
+			AI_Publication,AI_Edition_ID,AI_Edition,AI_AdType_ID,AI_AdType,AI_TradeTop_ID,AI_TradeTop,AI_TradeID,
+			AI_Trade,AI_Field_ID,AI_Field,AI_ArticleID,AI_Content,AI_Size_ID,AI_Size,AI_Width,AI_Height,
+			AI_PriceModeIC,AI_PriceModeCat,AI_InverseDiscount,AI_Color_ID,AI_Color,AI_PublishTime,AI_PublishEndTime,
+			AI_PublishDayCount,AI_Week,AI_PayMode_ID,AI_PayMode,AI_PriceList_ID,AI_PriceList,AI_Price,AI_UnitPrice,
+			AI_DiscountSpecial,AI_DiscountPact,AI_DiscountOther,AI_DiscountCustomer,AI_DiscountTotal,AI_AdditionalFee,
+			AI_AmountReceivable,AI_AmountPaid,AI_AmountRelief,AI_AmountReceived,AI_Debt,AI_BadDebt,AI_RebateMoney,
+			AI_InvoicedMoney,AI_UninvoicedMoney,AI_BalancedMoney,AI_UnbalancedMoney,AI_PayStatus,AI_IfCanceled,
+			AI_IfFigSign,AI_PayTime,AI_AdvPages,AI_InvoiceNo,AI_OperatorID,AI_Area,AI_PubMemo,AI_Memo
+			
+			
+			
+		) 
+		
+		values (#{SYS_CREATED},#{SYS_LASTMODIFIED},#{SYS_CURRENTUSERID},#{SYS_CURRENTUSERNAME},#{SYS_AUTHORS},
+		#{SYS_HAVERELATION},#{AI_OrderID},#{AI_PreorderID},#{AI_Customer_ID},#{AI_Customer},#{AI_Agent_ID},#{AI_Agent},
+		#{AI_Advertiser_ID},#{AI_Advertiser},#{AI_Org_ID},#{AI_Org},#{AI_Salesman_ID},#{AI_Salesman},#{AI_Publication_ID},
+		#{AI_Publication},#{AI_Edition_ID},#{AI_Edition},#{AI_AdType_ID},#{AI_AdType},#{AI_TradeTop_ID},#{AI_TradeTop},#{AI_TradeID},
+		#{AI_Trade},#{AI_Field_ID},#{AI_Field},#{AI_ArticleID},#{AI_Content},#{AI_Size_ID},#{AI_Size},#{AI_Width},#{AI_Height},
+		#{AI_PriceModeIC},#{AI_PriceModeCat},#{AI_InverseDiscount},#{AI_Color_ID},#{AI_Color},#{AI_PublishTime},#{AI_PublishEndTime},
+		#{AI_PublishDayCount},#{AI_Week},#{AI_PayMode_ID},#{AI_PayMode},#{AI_PriceList_ID},#{AI_PriceList},#{AI_Price},#{AI_UnitPrice},
+		#{AI_DiscountSpecial},#{AI_DiscountPact},#{AI_DiscountOther},#{AI_DiscountCustomer},#{AI_DiscountTotal},#{AI_AdditionalFee},
+		#{AI_AmountReceivable},#{AI_AmountPaid},#{AI_AmountRelief},#{AI_AmountReceived},#{AI_Debt},#{AI_BadDebt},#{AI_RebateMoney},
+		#{AI_InvoicedMoney},#{AI_UninvoicedMoney},#{AI_BalancedMoney},#{AI_UnbalancedMoney},#{AI_PayStatus},#{AI_IfCanceled},
+		#{AI_IfFigSign},#{AI_PayTime},#{AI_AdvPages},#{AI_InvoiceNo},#{AI_OperatorID},#{AI_Area},#{AI_PubMemo},#{AI_Memo})
+	</insert>
+	<update id="updateAdvitem" parameterType="advitem">
+		update advitem 
+		<set>
+			<if test="SYS_LASTMODIFIED!=null">SYS_LASTMODIFIED=#{SYS_LASTMODIFIED},</if>
+			<if test="AI_Customer_ID!=null and AI_Customer_ID!=''">AI_Customer_ID=#{AI_Customer_ID},</if>
+			<if test="AI_Customer!=null and AI_Customer!=''">AI_Customer=#{AI_Customer},</if>
+			<if test="AI_Agent_ID!=null and AI_Agent_ID!=''">AI_Agent_ID=#{AI_Agent_ID},</if>
+			<if test="AI_Agent!=null and AI_Agent!=''">AI_Agent=#{AI_Agent},</if>
+			<if test="AI_Advertiser_ID!=null and AI_Advertiser_ID!=''">AI_Advertiser_ID=#{AI_Advertiser_ID},</if>
+			<if test="AI_Advertiser!=null and AI_Advertiser!=''">AI_Advertiser=#{AI_Advertiser},</if>
+			<if test="AI_Org!=null and AI_Org!=''">AI_Org=#{AI_Org},</if>
+			<if test="AI_Org_ID!=null and AI_Org_ID!=''">AI_Org_ID=#{AI_Org_ID},</if>
+			<if test="AI_Salesman_ID!=null and AI_Salesman_ID!=''">AI_Salesman_ID=#{AI_Salesman_ID},</if>
+			<if test="AI_Salesman!=null and AI_Salesman!=''">AI_Salesman=#{AI_Salesman},</if>
+			<if test="AI_Publication_ID!=null and AI_Publication_ID!=''">AI_Publication_ID=#{AI_Publication_ID},</if>
+			<if test="AI_Publication!=null and AI_Publication!=''">AI_Publication=#{AI_Publication},</if>
+			<if test="AI_Edition_ID!=null and AI_Edition_ID!=''">AI_Edition_ID=#{AI_Edition_ID},</if>
+			<if test="AI_Edition!=null and AI_Edition!=''">AI_Edition=#{AI_Edition},</if>
+			<if test="AI_AdType_ID!=null and AI_AdType_ID!=''">AI_AdType_ID=#{AI_AdType_ID},</if>
+			<if test="AI_AdType!=null and AI_AdType!=''">AI_AdType=#{AI_AdType},</if>
+			<if test="AI_TradeID!=null and AI_TradeID!=''">AI_TradeID=#{AI_TradeID},</if>
+			<if test="AI_Trade!=null and AI_Trade!=''">AI_Trade=#{AI_Trade},</if>
+			<if test="AI_Field_ID!=null and AI_Field_ID!=''">AI_Field_ID=#{AI_Field_ID},</if>
+			<if test="AI_Field!=null and AI_Field!=''">AI_Field=#{AI_Field},</if>
+			<if test="AI_Content!=null and AI_Content!=''">AI_Content=#{AI_Content},</if>
+			<if test="AI_Size_ID!=null and AI_Size_ID!=''">AI_Size_ID=#{AI_Size_ID},</if>
+			<if test="AI_Size!=null and AI_Size!=''">AI_Size=#{AI_Size},</if>
+			<if test="AI_Width!=null and AI_Width!=''">AI_Width=#{AI_Width},</if>
+			<if test="AI_Height!=null and AI_Height!=''">AI_Height=#{AI_Height},</if>
+			<if test="AI_PriceModeIC!=null and AI_PriceModeIC!=''">AI_PriceModeIC=#{AI_PriceModeIC},</if>
+			<if test="AI_PriceModeCat!=null and AI_PriceModeCat!=''">AI_PriceModeCat=#{AI_PriceModeCat},</if>
+			<if test="AI_InverseDiscount!=null and AI_InverseDiscount!=''">AI_InverseDiscount=#{AI_InverseDiscount},</if>
+			<if test="AI_Week!=null">AI_Week=#{AI_Week},</if>
+			<if test="AI_Color!=null and AI_Color!=''">AI_Color=#{AI_Color},</if>
+			<if test="AI_Color_ID!=null and AI_Color_ID!=''">AI_Color_ID=#{AI_Color_ID},</if>
+			<if test="AI_PublishTime!=null">AI_PublishTime=#{AI_PublishTime},</if>
+			<if test="AI_PublishEndTime!=null">AI_PublishEndTime=#{AI_PublishEndTime},</if>
+			<if test="AI_PublishDayCount!=null and AI_PublishDayCount!=''">AI_PublishDayCount=#{AI_PublishDayCount},</if>
+			<if test="AI_PayMode_ID!=null and AI_PayMode_ID!=''">AI_PayMode_ID=#{AI_PayMode_ID},</if>
+			<if test="AI_PayMode!=null and AI_PayMode!=''">AI_PayMode=#{AI_PayMode},</if>
+			<if test="AI_PriceList!=null and AI_PriceList!=''">AI_PriceList=#{AI_PriceList},</if>
+			<if test="AI_Price!=null and AI_Price!=''">AI_Price=#{AI_Price},</if>
+			<if test="AI_UnitPrice!=null and AI_UnitPrice!=''">AI_UnitPrice=#{AI_UnitPrice},</if>
+			<if test="AI_DiscountSpecial!=null and AI_DiscountSpecial!=''">AI_DiscountSpecial=#{AI_DiscountSpecial},</if>
+			<if test="AI_DiscountPact!=null and AI_DiscountPact!=''">AI_DiscountPact=#{AI_DiscountPact},</if>
+			<if test="AI_DiscountOther!=null and AI_DiscountOther!=''">AI_DiscountOther=#{AI_DiscountOther},</if>
+			<if test="AI_DiscountCustomer!=null and AI_DiscountCustomer!=''">AI_DiscountCustomer=#{AI_DiscountCustomer},</if>
+			<if test="AI_DiscountTotal!=null and AI_DiscountTotal!=''">AI_DiscountTotal=#{AI_DiscountTotal},</if>
+			<if test="AI_AdditionalFee!=null and AI_AdditionalFee!=''">AI_AdditionalFee=#{AI_AdditionalFee},</if>
+			<if test="AI_AmountReceivable!=null and AI_AmountReceivable!=''">AI_AmountReceivable=#{AI_AmountReceivable},</if>
+			<if test="AI_AmountPaid!=null and AI_AmountPaid!=''">AI_AmountPaid=#{AI_AmountPaid},</if>
+			<if test="AI_AmountRelief!=null and AI_AmountRelief!=''">AI_AmountRelief=#{AI_AmountRelief},</if>
+			<if test="AI_AmountReceived!=null and AI_AmountReceived!=''">AI_AmountReceived=#{AI_AmountReceived},</if>
+			<if test="AI_Debt!=null and AI_Debt!=''">AI_Debt=#{AI_Debt},</if>
+			<if test="AI_BadDebt!=null and AI_BadDebt!=''">AI_BadDebt=#{AI_BadDebt},</if>
+			<if test="AI_RebateMoney!=null and AI_RebateMoney!=''">AI_RebateMoney=#{AI_RebateMoney},</if>
+			<if test="AI_InvoicedMoney!=null and AI_InvoicedMoney!=''">AI_InvoicedMoney=#{AI_InvoicedMoney},</if>
+			<if test="AI_UninvoicedMoney!=null and AI_UninvoicedMoney!=''">AI_UninvoicedMoney=#{AI_UninvoicedMoney},</if>
+			<if test="AI_BalancedMoney!=null and AI_BalancedMoney!=''">AI_BalancedMoney=#{AI_BalancedMoney},</if>
+			<if test="AI_UnbalancedMoney!=null and AI_UnbalancedMoney!=''">AI_UnbalancedMoney=#{AI_UnbalancedMoney},</if>
+			<if test="AI_PayStatus!=null and AI_PayStatus!=''">AI_PayStatus=#{AI_PayStatus},</if>
+			<if test="AI_IfCanceled!=null and AI_IfCanceled!=''">AI_IfCanceled=#{AI_IfCanceled},</if>
+			<if test="AI_IfFigSign!=null and AI_IfFigSign!=''">AI_IfFigSign=#{AI_IfFigSign},</if>
+			<if test="AI_PayTime!=null and AI_PayTime!=''">AI_PayTime=#{AI_PayTime},</if>
+			<if test="AI_AdvPages!=null and AI_AdvPages!=''">AI_AdvPages=#{AI_AdvPages},</if>
+			<if test="AI_InvoiceNo!=null and AI_InvoiceNo!=''">AI_InvoiceNo=#{AI_InvoiceNo},</if>
+			<if test="AI_OperatorID!=null and AI_OperatorID!=''">AI_OperatorID=#{AI_OperatorID},</if>
+			<if test="AI_Area!=null and AI_Area!=''">AI_Area=#{AI_Area},</if>
+			<if test="AI_PubMemo!=null and AI_PubMemo!=''">AI_PubMemo=#{AI_PubMemo},</if>
+			<if test="AI_Memo!=null and AI_Memo!=''">AI_Memo=#{AI_Memo}</if>
+		</set>
+		where SYS_DOCUMENTID=#{SYS_DOCUMENTID}
+	</update>
+	<update id="updateAdvdoc" parameterType="advitem">
+		update advdoc 
+		<set>
+			<if test="AI_Size!=null and AI_Size!=''">AI_Size!==#{AI_Size!=},</if>
+			<if test="AI_Size_ID!=null and AI_Size_ID!=''">AI_Size_ID=#{AI_Size_ID},</if>
+			<if test="AI_Color!=null and AI_Color!=''">AI_Color=#{AI_Color},</if>
+			<if test="AI_Color_ID!=null and AI_Color_ID!=''">AI_Color_ID=#{AI_Color_ID},</if>
+			<if test="AI_Content!=null and AI_Content!=''">AI_Content=#{AI_Content},</if>
+			<if test="AI_Width!=null and AI_Width!=''">AI_Width=#{AI_Width},</if>
+			<if test="AI_Height!=null and AI_Height!=''">AI_Height=#{AI_Height}</if>
+
+		</set>
+		where SYS_LASTMODIFIED=#{AI_ArticleID}
+	</update>
+	<insert id="insertAdvdoc" parameterType="advitem" useGeneratedKeys="true" keyProperty="AI_ArticleID">
+
+		insert into advdoc (SYS_AUTHORS,F_OrderID,F_Size,F_Size_ID,F_Color,F_Color_ID,F_Content,F_Width,F_Height) 
+		values 
+		(#{SYS_AUTHORS},#{AI_OrderID},#{AI_Size},#{AI_Size_ID},#{AI_Color},#{AI_Color_ID},#{AI_Content},#{AI_Width},#{AI_Height})
+	</insert>
+	
+</mapper>

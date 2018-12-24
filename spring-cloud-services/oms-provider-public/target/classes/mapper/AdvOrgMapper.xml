@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+
+  
+<mapper namespace="com.lt.cloud.mapper.AdvOrgMapper">
+	<select id="selectAllAdvOrg" parameterType="hashmap" resultType="advOrg">
+		select * from fsys_node 
+		<where>
+			<if test="NNODEID!=null and NNODEID!=''">NNODEID=#{NNODEID}</if>
+		</where>
+	</select>
+	<select id="selectAllTrade" parameterType="hashmap" resultType="advTrade">
+		select * from categoryTree where CT_cIfValid='y'
+	</select>
+
+</mapper>

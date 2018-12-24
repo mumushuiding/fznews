@@ -1,0 +1,11 @@
+D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\microservice-provider-user\src\main\java\com\lt\cloud\MicroserviceProviderUserApplication.java
+D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\microservice-provider-user\src\main\java\com\lt\cloud\controller\IdentityController.java
+D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\microservice-provider-user\src\main\java\com\lt\cloud\pojo\User.java
+D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\microservice-provider-user\src\main\java\com\lt\cloud\pojo\UserReceiver.java
+D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\microservice-provider-user\src\main\java\com\lt\cloud\service\IdentityService.java
+D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\microservice-provider-user\src\main\java\com\lt\cloud\controller\UserController.java
+D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\microservice-provider-user\src\main\java\com\lt\cloud\service\impl\IdentityServiceImpl.java
+D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\microservice-provider-user\src\main\java\com\lt\cloud\service\impl\UserServiceImpl.java
+D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\microservice-provider-user\src\main\java\com\lt\cloud\mapper\UserMapper.java
+D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\microservice-provider-user\src\main\java\com\lt\cloud\utils\JsonUtils.java
+D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\microservice-provider-user\src\main\java\com\lt\cloud\service\UserService.java

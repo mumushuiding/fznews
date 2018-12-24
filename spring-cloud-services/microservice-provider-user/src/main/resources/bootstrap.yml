@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: microservice-provider-user
+  cloud:
+    config:
+      profile: dev
+      
+      discovery:
+        enabled: true
+        service-id: microservice-config-server 
+  rabbitmq:
+    host: localhost #yxkh测试机
+    port: 5672
+    username: admin
+    password: admin
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    
+management: 
+  endpoints: 
+    web:
+      exposure:
+        include: "*"

@@ -1,0 +1,30 @@
+server:
+  port: 8888
+spring:
+  profiles:
+    active:
+    - native
+  cloud:
+    config:
+      server:
+        native:
+          search-locations:
+          -   classpath:config/
+  application:
+    name: microservice-config-server
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*" #暴露所有接口
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka/   
+  instance:
+    hostname: microservice-config-server
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5      # 心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-expiration-duration-in-seconds: 20  # 发呆时间，即服务续约到期时间（缺省为90s）
+    

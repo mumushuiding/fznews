@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+  <!-- 指向AdvitemMapper.java文件 -->
+  
+<mapper namespace="com.lt.cloud.mapper.PricelistitemMapper">
+     <select id="selectAll" parameterType="advotherReceiver" resultType="pricelistitem">
+		select * from pricelistitem 
+		 
+		<where>
+			<if test="SYS_DOCUMENTID!=null and SYS_DOCUMENTID!=''">
+				SYS_DOCUMENTID=#{SYS_DOCUMENTID}
+			</if>
+			<if test="E_PID!=null and E_PID!=''">and E_PID=#{E_PID}</if>
+			<if test="E_MID!=null and E_MID!=''">and E_MID=#{E_MID}</if>
+			<if test="E_AdField_ID!=null and E_AdField_ID!=''">and E_AdField_ID=#{E_AdField_ID}</if>
+			<if test="E_Color_ID!=null and E_Color_ID!=''">and E_Color_ID=#{E_Color_ID}</if>
+			<if test="E_AdSize_ID!=null and E_AdSize_ID!=''">and E_AdSize_ID=#{E_AdSize_ID}</if>
+
+		</where>
+	</select>
+
+</mapper>
