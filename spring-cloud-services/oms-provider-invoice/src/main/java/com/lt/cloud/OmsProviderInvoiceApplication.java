@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.stream.annotation.EnableBinding;
-import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -21,7 +19,6 @@ import com.lt.cloud.stream.InvoiceProcessor;
 @EnableDiscoveryClient
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages="com.lt.cloud.dao.jpa")
-@EnableBinding({InvoiceProcessor.class,Processor.class})
 public class OmsProviderInvoiceApplication {
 
 	public static void main(String[] args) {

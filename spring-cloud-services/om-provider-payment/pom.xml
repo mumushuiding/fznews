@@ -10,6 +10,10 @@
   <artifactId>om-provider-payment</artifactId>
   <name>om-provider-payment</name>
   <url>http://maven.apache.org</url>
+  <properties>
+	    <docker.repostory>registry.cn-hangzhou.aliyuncs.com</docker.repostory>
+	    <docker.registry.name>fznews</docker.registry.name>
+  </properties>
   <dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -25,15 +29,34 @@
 			<groupId>com.codingapi</groupId>
 			<artifactId>transaction-springcloud</artifactId>
 			<version>4.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/transaction-springcloud-4.2.0.jar</systemPath>
+			<exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.codingapi</groupId>
 			<artifactId>tx-client</artifactId>
 			<version>4.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/tx-client-4.2.0.jar</systemPath>
+			<exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+			<dependency>
+			<groupId>com.codingapi</groupId>
+			<artifactId>tx-plugins-db</artifactId>
+			<version>4.2.0</version>
+			<exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 				<!-- tx-client部分依赖包 -->
 		<dependency>
@@ -56,13 +79,6 @@
             <artifactId>kryo-shaded</artifactId>
             <version>4.0.0</version>
         </dependency>
-		<dependency>
-			<groupId>com.codingapi</groupId>
-			<artifactId>tx-plugins-db</artifactId>
-			<version>4.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/tx-plugins-db-4.2.0.jar</systemPath>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
 		    <groupId>com.alibaba</groupId>

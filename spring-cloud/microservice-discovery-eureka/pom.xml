@@ -8,6 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>microservice-discovery-eureka</artifactId>
+  <version>0.0.2-SNAPSHOT</version>
   <name>microservice-discovery-eureka</name>
   <url>http://maven.apache.org</url>
  <!-- Eureka Server  -->

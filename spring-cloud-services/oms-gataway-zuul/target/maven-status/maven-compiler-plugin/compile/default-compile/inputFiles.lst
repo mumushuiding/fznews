@@ -30,9 +30,7 @@ D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gatawa
 D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\feign\OrderFeignClient.java
 D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\service\impl\OrderServiceImpl.java
 D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\annotation\NoRepeatSubmit.java
-D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\stream\InvoiceProcessor.java
 D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\feign\InvoiceFeignClient.java
-D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\stream\AdvProcessor.java
 D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\pojo\adv\AdvotherReceiver.java
 D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\pojo\PaymentWrapper.java
 D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\feign\RebateFeignClient.java
@@ -69,7 +67,6 @@ D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gatawa
 D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\service\OmsPublicService.java
 D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\pojo\adv\AdvBase.java
 D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\service\BalanceService.java
-D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\stream\InvoiceStream.java
 D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\controller\IncomeAdjustController.java
 D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\feign\OmsPublicFeighnClient.java
 D:\Workspaces\spring-cloud-oms\spring-cloud-oms\spring-cloud-services\oms-gataway-zuul\src\main\java\com\lt\cloud\OmsGatawayZuulApplication.java

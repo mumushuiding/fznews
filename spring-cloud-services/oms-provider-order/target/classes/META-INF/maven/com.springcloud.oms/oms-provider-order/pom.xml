@@ -10,6 +10,10 @@
   <artifactId>oms-provider-order</artifactId>
   <name>oms-provider-order</name>
   <url>http://maven.apache.org</url>
+ <properties>
+	    <docker.repostory>registry.cn-hangzhou.aliyuncs.com</docker.repostory>
+	    <docker.registry.name>fznews</docker.registry.name>
+  </properties>
 <dependencies>
 		<!-- 分布式事务LCN -->
 		<!-- 必须要有 spring-boot-starter-web，否则无法获取HttpServletRequest，进而无法获取groupId-->
@@ -21,8 +25,6 @@
 			<groupId>com.codingapi</groupId>
 			<artifactId>transaction-springcloud</artifactId>
 			<version>4.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/transaction-springcloud-4.2.0.jar</systemPath>
 			<exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -34,8 +36,17 @@
 			<groupId>com.codingapi</groupId>
 			<artifactId>tx-client</artifactId>
 			<version>4.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/tx-client-4.2.0.jar</systemPath>
+			<exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+			<dependency>
+			<groupId>com.codingapi</groupId>
+			<artifactId>tx-plugins-db</artifactId>
+			<version>4.2.0</version>
 			<exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>
@@ -64,19 +75,6 @@
             <artifactId>kryo-shaded</artifactId>
             <version>4.0.0</version>
         </dependency>
-		<dependency>
-			<groupId>com.codingapi</groupId>
-			<artifactId>tx-plugins-db</artifactId>
-			<version>4.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/tx-plugins-db-4.2.0.jar</systemPath>
-			<exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
 		    <groupId>com.alibaba</groupId>

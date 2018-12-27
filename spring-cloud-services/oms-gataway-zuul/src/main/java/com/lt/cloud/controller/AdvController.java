@@ -1,50 +1,22 @@
 package com.lt.cloud.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.cloud.stream.annotation.Output;
-import org.springframework.cloud.stream.binding.BinderAwareChannelResolver;
-import org.springframework.core.annotation.Order;
-import org.springframework.integration.channel.DirectChannel;
-import org.springframework.integration.channel.PublishSubscribeChannel;
-import org.springframework.messaging.MessageChannel;
-import org.springframework.messaging.SubscribableChannel;
-import org.springframework.messaging.core.DestinationResolutionException;
-import org.springframework.messaging.core.DestinationResolver;
-import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.messaging.support.MessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import com.codingapi.tx.annotation.TxTransaction;
-import com.google.common.reflect.TypeToken;
 import com.lt.cloud.annotation.NoRepeatSubmit;
 import com.lt.cloud.config.SettingsErrorCode;
-import com.lt.cloud.pojo.adv.Advitem;
-import com.lt.cloud.pojo.adv.AdvitemReceiver;
 import com.lt.cloud.pojo.adv.AdvotherReceiver;
 import com.lt.cloud.service.AdvService;
-import com.lt.cloud.service.OrderService;
-import com.lt.cloud.stream.AdvProcessor;
 import com.lt.cloud.utils.JsonUtils;
-
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 
@@ -55,25 +27,6 @@ import reactor.core.publisher.Mono;
 public class AdvController {
 	@Autowired
 	private AdvService advService;
-	@Autowired
-	private PublishSubscribeChannel channel;
-	@Autowired AdvProcessor advProcessor;
-	@Autowired
-    private BinderAwareChannelResolver resolver;
-	@Autowired
-	private OrderService orderService;
-
-	@PostMapping("/adv/saveMessaging")
-	@NoRepeatSubmit
-
-	public void send(@RequestBody String advitems) {
-//		resolver.resolveDestination("outputAdv");
-//		channel.setChannelResolver(resolver);
-//		channel.setLoggingEnabled(true);
-//		channel.setShouldTrack(true);
-//		channel.send(MessageBuilder.withPayload(advitems).build());
-		advProcessor.outputAdv().send(MessageBuilder.withPayload(advitems).build());
-	}
 	@PostMapping("/adv/saveAdv")
 	@NoRepeatSubmit
 	@ResponseBody

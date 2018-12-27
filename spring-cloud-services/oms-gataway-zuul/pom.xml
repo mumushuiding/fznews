@@ -8,6 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>oms-gataway-zuul</artifactId>
+  <version>0.0.2-SNAPSHOT</version>
   <name>oms-gataway-zuul</name>
   <url>http://maven.apache.org</url>
   <properties>
@@ -15,20 +16,38 @@
 	    <docker.registry.name>fznews</docker.registry.name>
 	 </properties>
   <dependencies>
-	<!-- 分布式事务LCN -->
-		<dependency>
+  		<dependency>
 			<groupId>com.codingapi</groupId>
 			<artifactId>transaction-springcloud</artifactId>
 			<version>4.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/transaction-springcloud-4.2.0.jar</systemPath>
+			<exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 		<dependency>
 			<groupId>com.codingapi</groupId>
 			<artifactId>tx-client</artifactId>
 			<version>4.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/tx-client-4.2.0.jar</systemPath>
+			<exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+		</dependency>
+			<dependency>
+			<groupId>com.codingapi</groupId>
+			<artifactId>tx-plugins-db</artifactId>
+			<version>4.2.0</version>
+			<exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 		<!-- tx-client部分依赖包 -->
 		<dependency>
@@ -51,13 +70,6 @@
             <artifactId>kryo-shaded</artifactId>
             <version>4.0.0</version>
         </dependency>
-		<dependency>
-			<groupId>com.codingapi</groupId>
-			<artifactId>tx-plugins-db</artifactId>
-			<version>4.2.0</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/lib/tx-plugins-db-4.2.0.jar</systemPath>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
 		    <groupId>com.alibaba</groupId>
@@ -76,7 +88,7 @@
             </exclusions>
         </dependency>
 		
-		<!-- config -->
+		<!-- config 
 		<dependency>
 	      <groupId>org.springframework.cloud</groupId>
 	      <artifactId>spring-cloud-starter-config</artifactId>
@@ -85,7 +97,7 @@
 	      <groupId>org.springframework.cloud</groupId>
 	      <artifactId>spring-cloud-starter-bus-amqp</artifactId>
 	    </dependency>
-	    
+	    -->
 	    <!-- eureka -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -137,6 +149,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+           
             <!-- 打包Docker -->
         <plugin>
             <groupId>com.spotify</groupId>

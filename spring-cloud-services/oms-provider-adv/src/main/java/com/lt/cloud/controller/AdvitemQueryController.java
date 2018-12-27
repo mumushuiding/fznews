@@ -27,13 +27,6 @@ import reactor.core.publisher.Mono;
 @RefreshScope
 @RequestMapping("/advitem")
 public class AdvitemQueryController {
-	@Value("${profile}")//测试config
-	private String profile;
-	
-	@GetMapping("/profile")
-	public String test() {
-		return this.profile;
-	}
 	@Autowired
 	private AdvitemQueryService advitemQueryService;
 	@RequestMapping("/findAll")

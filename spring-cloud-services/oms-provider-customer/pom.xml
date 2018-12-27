@@ -10,18 +10,14 @@
   <artifactId>oms-provider-customer</artifactId>
   <name>oms-provider-customer</name>
   <url>http://maven.apache.org</url>
+ <properties>
+	    <docker.repostory>registry.cn-hangzhou.aliyuncs.com</docker.repostory>
+	    <docker.registry.name>fznews</docker.registry.name>
+  </properties>
 <dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-		<dependency>
-	      <groupId>org.springframework.cloud</groupId>
-	      <artifactId>spring-cloud-starter-bus-amqp</artifactId>
-	    </dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -31,11 +27,6 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-sleuth</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-zipkin</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-stream-binder-rabbit</artifactId>
@@ -120,6 +111,45 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			 <!-- 打包Docker -->
+        <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.4.13</version>
+            <executions>
+                <execution>
+                    <id>build-image</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>build</goal>
+                    </goals>
+                </execution>
+            </executions>
+			<configuration>
+				<!--镜像名，这里用工程名-->
+				<imageName>${docker.repostory}/${docker.registry.name}/${project.artifactId}:${project.version}</imageName>
+				<!--TAG,这里用工程版本号-->
+				<imageTags>
+					<imageTag>${project.version}</imageTag>
+				</imageTags>
+				<!--镜像的FROM，使用java官方镜像-->
+				<baseImage>java:8u111-jdk</baseImage>
+				<!--该镜像的容器启动后，直接运行spring boot工程-->
+				<entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+				<forceTags>true</forceTags>
+				<!--构建镜像的配置信息-->
+				<resources>
+					<resource>
+						<targetPath>/</targetPath>
+						<directory>${project.build.directory}</directory>
+						<include>${project.build.finalName}.jar</include>
+					</resource>
+				</resources>
+				<serverId>docker-aliyun</serverId>
+				<registryUrl>${docker.repostory}</registryUrl>
+				<pushImage>true</pushImage>
+			</configuration>
+        </plugin>
 		</plugins>
 	</build>
 </project>

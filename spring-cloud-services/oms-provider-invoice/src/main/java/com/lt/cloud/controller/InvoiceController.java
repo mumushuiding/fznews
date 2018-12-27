@@ -4,16 +4,8 @@ import java.util.List;
 import org.hibernate.sql.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.cloud.stream.annotation.StreamListener;
-import org.springframework.cloud.stream.messaging.Processor;
-import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.MessageHandler;
-import org.springframework.messaging.SubscribableChannel;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,12 +24,6 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/invoice")
 public class InvoiceController {
-//	SubscribableChannel invoiceChannel;
-//	public InvoiceController(SubscribableChannel invoiceChannel) {
-//		this.invoiceChannel=invoiceChannel;
-//	}
-	@Autowired 
-	private InvoiceProcessor invoiceChannel;
 	@Autowired
 	private InvoiceService invoiceService;
 	@RequestMapping("/findAll")
@@ -66,18 +52,5 @@ public class InvoiceController {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-	}
-	@RequestMapping(value="/send1")
-	@SendTo(Processor.OUTPUT)
-	public Flux<Invoice>  createInvoice2() {
-		InvoiceReceiver invoiceReceiver=new InvoiceReceiver();
-		invoiceReceiver.setPageSize(1);
-		List<Invoice> list=this.invoiceService.findAll(invoiceReceiver).getContent();
-//		list.stream().forEach(invoce->{
-//			invoiceChannel.output().send(MessageBuilder.withPayload(invoce).build());
-//		});
-		return Flux.fromStream(list.stream());
-
-		
 	}
 }

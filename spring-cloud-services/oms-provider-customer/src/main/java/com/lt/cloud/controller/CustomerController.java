@@ -16,12 +16,6 @@ import com.lt.cloud.service.CustomerService;
 public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
-	@Value("${profile}")
-	private String profile;
-	@GetMapping("/profile")
-	public String test() {
-		return this.profile;
-	}
 	@RequestMapping("/customer/insertCustomer")
 	public Long insertCustomer(@RequestBody Customer customer) {
 		return this.customerService.insertCustomer(customer);
