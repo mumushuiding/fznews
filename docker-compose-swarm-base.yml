@@ -1,0 +1,62 @@
+version: "3"
+services:
+  eureka-server1:
+    image: registry.cn-hangzhou.aliyuncs.com/mumushuiding/microservice-discovery-eureka:0.0.1-SNAPSHOT
+    deploy: 
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.05'
+          memory: 256M
+        reservations:
+          # cpus: '0.05'
+          memory: 128M
+    networks: 
+      eureka_default:
+        aliases:
+          - eureka
+    ports: 
+      - "127.0.0.1:8761:8080"
+    expose:
+      - "8080"
+      - "8761"
+    environment: 
+      - spring.profiles.active=swarm
+      - EUREKA_SERVER_ADDRESS=eureka-server2
+  eureka-server2:
+    image: registry.cn-hangzhou.aliyuncs.com/mumushuiding/microservice-discovery-eureka:0.0.1-SNAPSHOT
+    deploy: 
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.05'
+          memory: 256M
+        reservations:
+          cpus: '0.05'
+          memory: 128M
+    networks:
+      eureka_default:
+        aliases:
+          - eureka
+    ports:
+      - "127.0.0.1:8762:8080"
+    expose:
+      - "8080"
+      - "8761"
+    environment:
+      - spring.profiles.active=swarm
+      - EUREKA_SERVER_ADDRESS=eureka
+# 使用已有网络
+# networks:
+#   springcloud-overlay:
+#     external:
+#       name: springcloud-overlay
+# 使用自定义网络
+networks:
+  eureka_default:
+    external:
+      name: eureka_default

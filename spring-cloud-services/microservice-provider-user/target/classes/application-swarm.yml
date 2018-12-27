@@ -1,0 +1,45 @@
+server: 
+  port: 8005
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+feign:
+  hystrix:
+    enabled: true
+spring:
+  application:
+    name: oms-provider-payment 
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://129.0.99.68:3306/fznews_payment?useSSL=false&useUnicode=true&characterEncoding=utf8
+    username: root
+    password: 1qaz@WSX 
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid: 
+      filter:
+        stat:
+          enabled: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 5      # 心跳时间，即服务续约间隔时间（缺省为30s）
+    lease-expiration-duration-in-seconds: 20  # 发呆时间，即服务续约到期时间（缺省为90s）
+# To set thread isolation to SEMAPHORE for LCN 
+init-db: true
+hystrix:
+  command: 
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+#txmanager地址
+tm: 
+  manager:
+    url: http://127.0.0.1:7000/tx/manager/
+
+

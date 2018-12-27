@@ -1,0 +1,98 @@
+version: "3"
+services:
+# 资源使用监控
+  influxdb:
+    image: tutum/influxdb
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 256M
+    ports:
+      - "8083:8083"
+      - "8086:8086"
+    # expose是关键，否则telegraf无法连接
+    expose:
+      - "8090"
+      - "8099"
+    # env_file:
+    #   - 'env.influxdb'
+    networks:
+      monitor:
+        aliases:
+          - influxdb
+    volumes:
+      # Data persistency
+      # sudo mkdir -p ./influxdb/data
+      - ./influxdb/data:/var/lib/influxdb
+      # 配置docker里的时间为东八区时间
+      # - /etc/timezone:/etc/timezone:ro
+      # - /etc/localtime:/etc/localtime:ro
+    environment:
+      - ADMIN_USER=root
+      - INFLUXDB_INIT_PWD=root
+      - PRE_CREATE_DB=telegraf
+      - FORCE_HOSTNAME=auto
+  telegraf:
+    image: telegraf:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 256M
+    networks:
+      monitor:
+        aliases:
+          - telegraf
+    depends_on:
+      - influxdb
+    # volumes:
+      # - /etc/timezone:/etc/timezone:ro
+      # - /etc/localtime:/etc/localtime:ro
+    environment:
+      - urls = http://localhost:8086
+  grafana:
+    image: grafana/grafana:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 256M
+    networks:
+      monitor:
+        aliases:
+          - grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - influxdb
+    volumes:
+    # Data persistency
+    # sudo mkdir -p ./grafana/data; chown 472:472 ./grafana/data
+      - ./grafana/data:/var/lib/grafana
+      # - /etc/timezone:/etc/timezone:ro
+      # - /etc/localtime:/etc/localtime:ro
+    environment:
+      - HTTP_USER=root
+      - HTTP_PASS=root
+      - INFLUXDB_HOST=influxdb
+      - INFLUXDB_PORT=8086
+      - INFLUXDB_NAME=telegraf
+      - INFLUXDB_USER=root
+      - INFLUXDB_PASS=root
+# 使用已有网络
+# networks:
+#   springcloud-overlay:
+#     external:
+#       name: springcloud-overlay
+networks:
+  monitor:

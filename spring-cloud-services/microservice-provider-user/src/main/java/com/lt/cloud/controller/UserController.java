@@ -14,7 +14,6 @@ import com.lt.cloud.service.UserService;
 import com.lt.cloud.utils.JsonUtils;
 
 @RestController
-@RefreshScope
 public class UserController {
 
 	

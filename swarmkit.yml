@@ -1,0 +1,8 @@
+version: "2"
+services: 
+   microservice-provider-user: 
+      image: registry.cn-hangzhou.aliyuncs.com/mumushuiding/microservice-provider-user:0.0.1-SNAPSHOT
+      ports:
+        - "9000:8080"  
+      external_links:
+        - eureka_eureka-server1

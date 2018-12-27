@@ -10,6 +10,10 @@
   <artifactId>oms-gataway-zuul</artifactId>
   <name>oms-gataway-zuul</name>
   <url>http://maven.apache.org</url>
+  <properties>
+	    <docker.repostory>registry.cn-hangzhou.aliyuncs.com</docker.repostory>
+	    <docker.registry.name>fznews</docker.registry.name>
+	 </properties>
   <dependencies>
 	<!-- 分布式事务LCN -->
 		<dependency>
@@ -169,7 +173,7 @@
 				</resources>
 				<serverId>docker-aliyun</serverId>
 				<registryUrl>${docker.repostory}</registryUrl>
-				<pushImage>false</pushImage>
+				<pushImage>true</pushImage>
 			</configuration>
         </plugin>
         </plugins>

@@ -3,7 +3,6 @@ services:
    microservice-provider-user: 
       image: registry.cn-hangzhou.aliyuncs.com/mumushuiding/microservice-provider-user:0.0.1-SNAPSHOT
       ports:
-        - "8000:8000"  
-      external_links: 
-        - "microservice-discovery-eureka:eureka-server"
-        - "microservice-config-server"
+        - "9000:8080"  
+      external_links:
+        - eureka_eureka-server1

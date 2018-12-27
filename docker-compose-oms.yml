@@ -1,0 +1,28 @@
+version: "3"
+services: 
+   microservice-provider-user: 
+      image: registry.cn-hangzhou.aliyuncs.com/mumushuiding/microservice-provider-user:0.0.1-SNAPSHOT
+      deploy:
+        replicas: 1
+        restart_policy:
+          condition: on-failure
+        resources:
+          limits:
+            cpus: '0.05'
+            memory: 512M
+          reservations:
+            cpus: '0.05'
+            memory: 256M
+      networks:
+        - eureka_default
+      ports:
+        - "127.0.0.1:8000:8000"  
+      expose:
+        - "8000"
+      environment: 
+        - spring.profiles.active=swarm
+        - EUREKA_SERVER_ADDRESS=eureka
+networks:
+  eureka_default:
+    external:
+      name: eureka_default

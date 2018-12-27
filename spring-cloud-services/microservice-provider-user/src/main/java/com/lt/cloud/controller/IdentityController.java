@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lt.cloud.pojo.User;
 import com.lt.cloud.service.IdentityService;
 
-@RefreshScope
 @RestController
 public class IdentityController{
 	@Autowired 

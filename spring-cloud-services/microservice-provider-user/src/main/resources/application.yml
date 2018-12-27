@@ -1,6 +1,8 @@
 server:
-  port: 8000
-spring:
+  port: 8080
+spring: 
+  application: 
+    name: microservice-provider-user
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://129.0.99.68:3306/fznews_user?useSSL=false&useUnicode=true&characterEncoding=utf8
@@ -11,10 +13,15 @@ spring:
       filter:
         stat:
           enabled: false
-logging:
-  level: 
-     com.lt.cloud.mapper: debug  #输出查询语句
-
-
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+mybatis: 
+  type-aliases-package:  com.lt.cloud.pojo
+  mapper-locations: 
+    - classpath:mapper/*.xml
             
   

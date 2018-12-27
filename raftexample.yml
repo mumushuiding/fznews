@@ -1,0 +1,23 @@
+version: '2'
+services:
+  raftexample1:
+    image: fsoppelsa/raftexample
+    command: --id 1 --cluster
+      http://127.0.0.1:9021,http://127.0.0.1:9022,http://127.0.0.1:9023 --port 9121
+    ports:
+    - "9021:9021"
+    - "9121:9121"
+  raftexample2:
+    image: fsoppelsa/raftexample
+    command: --id 2 --cluster
+      http://127.0.0.1:9021,http://127.0.0.1:9022,http://127.0.0.1:9023 --port 9122
+    ports:
+    - "9022:9022"
+    - "9122:9122"
+  raftexample3:
+    image: fsoppelsa/raftexample
+    command: --id 3 --cluster
+      http://127.0.0.1:9021,http://127.0.0.1:9022,http://127.0.0.1:9023 --port 9123
+    ports:
+    - "9023:9023"
+    - "9123:9123"
